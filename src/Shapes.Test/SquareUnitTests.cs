@@ -13,15 +13,18 @@ namespace Shapes.Test
             _squareShape = new SquareModule();
         }
 
-        [Test]
-        public void Calculate_Area_Of_Square()
+        [TestCase(2, 2, 4)]
+        [TestCase(2, 3, 6)]
+        [TestCase(10, 4, 40)]
+        [TestCase(4, 4, 16)]
+        public void Calculate_Area_Of_Square(double height, double width, double result)
         {
-            _squareShape.Height = 2;
-            _squareShape.Width = 4;
+            _squareShape.Height = height;
+            _squareShape.Width = width;
 
             double area = _squareShape.CalculateArea();
 
-            Assert.That(area, Is.EqualTo(8));
+            Assert.That(area, Is.EqualTo(result));
         }
     }
 }
