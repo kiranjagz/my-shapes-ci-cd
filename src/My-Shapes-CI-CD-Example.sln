@@ -5,9 +5,9 @@ VisualStudioVersion = 16.0.31229.75
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{1A616E7F-3BDD-40DF-8E16-50425BFB18A8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shapes.Api", "Shapes.Api\Shapes.Api.csproj", "{7FF711BC-62AF-4439-86A3-8212D8EFD920}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shapes.Api", "Shapes.Api\Shapes.Api.csproj", "{7FF711BC-62AF-4439-86A3-8212D8EFD920}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shapes.Test", "Shapes.Test\Shapes.Test.csproj", "{F7EE0164-512F-4E50-B589-CF0558D3005F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shapes.Test", "Shapes.Test\Shapes.Test.csproj", "{F7EE0164-512F-4E50-B589-CF0558D3005F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
