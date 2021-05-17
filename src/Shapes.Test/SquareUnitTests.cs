@@ -26,5 +26,16 @@ namespace Shapes.Test
 
             Assert.That(area, Is.EqualTo(result));
         }
+
+        [TestCase(-2, 2, 4)]
+        public void Calculate_Area_Of_Square_Negative_Number(double height, double width, double result)
+        {
+            _squareShape.Height = height;
+            _squareShape.Width = width;
+
+            double area = _squareShape.CalculateArea();
+
+            Assert.That(area, Is.EqualTo(result));
+        }
     }
 }
