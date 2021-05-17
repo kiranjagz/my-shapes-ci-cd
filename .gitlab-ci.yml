@@ -11,7 +11,7 @@ before_script:
     - "cd src"
     - "dotnet restore"
 
-build:
+build applications:
     stage: build
     script: 
         - "dotnet build"
@@ -19,7 +19,7 @@ build:
         paths:
             - ./**/bin
 
-test:
+run unit test app:
   stage: test
   script:
     - "cd $test"
