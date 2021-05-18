@@ -9,7 +9,6 @@ variables:
     test: "Shapes.Test"
 
 before_script:
-    - "cd src"
     - "dotnet restore"
 
 build applications:
@@ -19,7 +18,7 @@ build applications:
         - "dotnet build"
     artifacts:
         paths:
-            - ./**/bin
+            - ./bin
 
 # run unit test app:
 #   stage: test
@@ -40,12 +39,9 @@ release:
     - master
   artifacts:
     paths:
-      - ./**/publish/
+      - publish/
   script:
-    - ls
-    - "cd src/Shapes.api"
-    - ls
-    - dotnet publish "Shapes.Api.csproj" -c Release -o ../app/publish 
+    - dotnet publish "Shapes.Api/Shapes.Api.csproj" -c Release -o ../app/publish 
 
 
 
