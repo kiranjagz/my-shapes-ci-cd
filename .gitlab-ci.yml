@@ -43,7 +43,7 @@ release:
       - ./**/publish/
   script:
     - ls
-    - "cd Shapes.api"
+    - "cd src/Shapes.api"
     - ls
     - dotnet publish "Shapes.Api.csproj" -c Release -o ../app/publish 
 
