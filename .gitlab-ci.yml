@@ -42,8 +42,8 @@ release:
     paths:
       - ./**/publish/
   script:
-    - dotnet publish -c Release -o ../publish shapes.api/shapes.api/shapes.api.csproj
     - ls
+    - dotnet publish -c Release -o ../publish src/Shapes.Api/Shapes.Api.csproj
 
 
 
