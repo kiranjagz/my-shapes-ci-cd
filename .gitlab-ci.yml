@@ -1,8 +1,8 @@
 image: mcr.microsoft.com/dotnet/core/sdk:latest
 
 stages: 
-  # - build
-  # - test
+  - build
+  - test
   - release
 
 variables:
@@ -11,27 +11,27 @@ variables:
 before_script:
     - "dotnet restore"
 
-# build applications:
-#     stage: build
-#     script: 
-#         - ls
-#         - "dotnet build"
-#     artifacts:
-#         paths:
-#             - ./**/bin
+build app:
+    stage: build
+    script: 
+        - ls
+        - "dotnet build"
+    artifacts:
+        paths:
+            - ./**/bin
 
-# run unit test app:
-#   stage: test
-#   script:
-#     - "cd $test"
-#     - 'dotnet test --test-adapter-path:. --logger:"junit;LogFilePath=..\artifacts\{assembly}-test-result.xml;MethodFormat=Class;FailureBodyFormat=Verbose"'
-#   artifacts:
-#     when: always
-#     paths:
-#       - ./**/*test-result.xml
-#     reports:
-#       junit:
-#         - ./**/*test-result.xml
+run unit test app:
+  stage: test
+  script:
+    - "cd $test"
+    - 'dotnet test --test-adapter-path:. --logger:"junit;LogFilePath=..\artifacts\{assembly}-test-result.xml;MethodFormat=Class;FailureBodyFormat=Verbose"'
+  artifacts:
+    when: always
+    paths:
+      - ./**/*test-result.xml
+    reports:
+      junit:
+        - ./**/*test-result.xml
         
 release:
   stage: release
@@ -39,6 +39,7 @@ release:
     - master
   script:
     - dotnet publish "Shapes.Api/Shapes.Api.csproj" -c Release -o ./publish
+    - ls
   artifacts:
     paths:
       - ./publish
