@@ -18,7 +18,7 @@ build applications:
         - "dotnet build"
     artifacts:
         paths:
-            - ../bin
+            - ./**/bin
 
 # run unit test app:
 #   stage: test
