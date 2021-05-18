@@ -42,7 +42,7 @@ release:
     - ls
   artifacts:
       paths:
-      - ./publish
+      - /publish
 
 
 
