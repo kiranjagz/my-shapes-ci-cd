@@ -35,7 +35,7 @@ run unit test app:
 test the api:
     stage: test
     script:
-      - "cd src/" 
+      - "cd src/Shapes.Api/bin" 
       - "dotnet run"
 
 
