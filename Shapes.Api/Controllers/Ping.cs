@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
+using Shapes.Api.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,11 +14,22 @@ namespace Shapes.Api.Controllers
     [ApiController]
     public class Ping : ControllerBase
     {
+        private readonly IPingy _pingy;
+        private readonly ILogger _logger;
+        public Ping(IPingy pingy, ILogger<Ping> logger)
+        {
+            _pingy = pingy;
+            _logger = logger;
+        }
         // GET: api/<Ping>
         [HttpGet]
         public IActionResult Get()
         {
-            return Ok("Pong!");
+            var message = _pingy.Ping();
+
+            _logger.Log(LogLevel.Information, $"Ping controller called with message: {message}");
+
+            return Ok(message);
         }
     }
 }

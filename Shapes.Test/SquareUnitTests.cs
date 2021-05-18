@@ -3,7 +3,7 @@ using Shapes.Api.Services.Square;
 
 namespace Shapes.Test
 {
-    public class Tests
+    public class SquareUnitTests
     {
         private SquareModule _squareShape;
 
