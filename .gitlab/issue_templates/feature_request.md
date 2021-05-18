@@ -8,7 +8,7 @@
 
 ## Technical acceptance criteria
 
-(Please fill in atleast one acceptance criteria use case)
+(Please fill in at-least one acceptance criteria use case)
 
 ## What is the expected behavior?
 
