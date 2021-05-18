@@ -39,9 +39,9 @@ release:
     - master
   script:
     - dotnet publish "Shapes.Api/Shapes.Api.csproj" -c Release -o ./publish
-    - "cd ./publish"
-    - dotnet "Shapes.Api.dll"
-    - curl "http://localhost:5000/api/square" | grep -q "8"
+  artifacts:
+    paths:
+      - ./publish
 
 
 
