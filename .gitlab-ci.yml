@@ -38,11 +38,7 @@ release:
   only:
     - master
   script:
-    - dotnet publish "Shapes.Api/Shapes.Api.csproj" -c Release -o ../../../publish
-    - ls
-  artifacts:
-      paths:
-      - /publish
+    - dotnet run
 
 
 
