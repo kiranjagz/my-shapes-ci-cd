@@ -20,7 +20,7 @@ namespace Shapes.Test
         [Test]
         public void Return_Pong_Message()
         {
-            Assert.That(_pingy.Ping(), Is.EqualTo("Ponsg!"));
+            Assert.That(_pingy.Ping(), Is.EqualTo("Pong!"));
         }
     }
 }
