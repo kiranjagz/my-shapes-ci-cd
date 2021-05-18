@@ -34,7 +34,9 @@ run unit test app:
         
 test the api:
     stage: test
-    script: "dotnet run"
+    script:
+      - "cd src/" 
+      - "dotnet run"
 
 
 
