@@ -18,7 +18,7 @@ build applications:
         - "dotnet build"
     artifacts:
         paths:
-            - /bin
+            - ../bin
 
 # run unit test app:
 #   stage: test
@@ -41,7 +41,7 @@ release:
     paths:
       - publish/
   script:
-    - dotnet publish "Shapes.Api/Shapes.Api.csproj" -c Release -o ../app/publish 
+    - dotnet publish "Shapes.Api/Shapes.Api.csproj" -c Release -o ../publish 
 
 
 
