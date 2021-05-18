@@ -1,7 +1,7 @@
 image: mcr.microsoft.com/dotnet/core/sdk:latest
 
 stages: 
-  - build
+  # - build
   # - test
   - release
 
@@ -11,14 +11,14 @@ variables:
 before_script:
     - "dotnet restore"
 
-build applications:
-    stage: build
-    script: 
-        - ls
-        - "dotnet build"
-    artifacts:
-        paths:
-            - ./**/bin
+# build applications:
+#     stage: build
+#     script: 
+#         - ls
+#         - "dotnet build"
+#     artifacts:
+#         paths:
+#             - ./**/bin
 
 # run unit test app:
 #   stage: test
@@ -38,10 +38,11 @@ release:
   only:
     - master
   script:
-    - dotnet publish "Shapes.Api/Shapes.Api.csproj" -c Release -o ../publish 
+    - dotnet publish "Shapes.Api/Shapes.Api.csproj" -c Release -o ../publish
+    - ls
   artifacts:
       paths:
-      - ../publish
+      - ../**/publish
 
 
 
