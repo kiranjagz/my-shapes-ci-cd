@@ -37,11 +37,11 @@ release:
   stage: release
   only:
     - master
-  artifacts:
-    paths:
-      - publish/
   script:
-    - dotnet publish "Shapes.Api/Shapes.Api.csproj" -c Release -o ../**/publish 
+    - dotnet publish "Shapes.Api/Shapes.Api.csproj" -c Release -o ../publish 
+  artifacts:
+      paths:
+      - ../publish
 
 
 
