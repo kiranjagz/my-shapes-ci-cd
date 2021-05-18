@@ -43,7 +43,9 @@ release:
       - ./**/publish/
   script:
     - ls
-    - dotnet publish "src/Shapes.Api/Shapes.Api.csproj" -c Release -o ../app/publish 
+    - "cd Shapes.api"
+    - ls
+    - dotnet publish "Shapes.Api.csproj" -c Release -o ../app/publish 
 
 
 
