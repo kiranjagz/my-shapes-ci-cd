@@ -32,12 +32,5 @@ namespace Shapes.Api.Controllers
 
             return Ok(area);
         }
-
-        // GET api/<Square>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
-        {
-            return "value";
-        }
     }
 }
