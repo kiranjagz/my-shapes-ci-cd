@@ -40,9 +40,10 @@ release:
     - master
   artifacts:
     paths:
-      - ./src/publish/
+      - ./**/publish/
   script:
     - dotnet publish -c Release -o ../publish shapes.api/shapes.api.csproj
+    - ls
 
 
 
