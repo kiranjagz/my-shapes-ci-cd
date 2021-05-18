@@ -38,7 +38,10 @@ release:
   only:
     - master
   script:
-    - dotnet run
+    - dotnet publish "Shapes.Api/Shapes.Api.csproj" -c Release -o /app/publish
+    - "cd app/publish"
+    - dotnet "Shapes.Api.dll"
+
 
 
 
