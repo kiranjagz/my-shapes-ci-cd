@@ -3,6 +3,7 @@ image: mcr.microsoft.com/dotnet/core/sdk:latest
 stages: 
   - build
   - test
+  - release
 
 variables:
     test: "Shapes.Test"
@@ -32,11 +33,15 @@ run unit test app:
       junit:
         - ./**/*test-result.xml
         
-test the api:
-    stage: test
-    script:
-      - "cd src/Shapes.Api/bin" 
-      - "dotnet run"
+release:
+  stage: release
+  only:
+    - master
+  artifacts:
+    paths:
+      - publish/
+  script:
+    - dotnet publish -c Release -o ../publish shapes.api/shapes.api.csproj
 
 
 
