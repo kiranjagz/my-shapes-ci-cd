@@ -1,6 +1,6 @@
 ## Summary
 
-(Summarize the feature concisely)
+(Summarize the feature concisely) :)
 
 ## Feature request business request
 
