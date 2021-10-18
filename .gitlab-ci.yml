@@ -8,6 +8,7 @@ stages:
 
 variables:
     test: "Shapes.Test"
+    app: "Shapes.Api"
 
 before_script:
     - "dotnet restore"
@@ -42,6 +43,7 @@ docker build image:
   before_script:
     - echo $CI_BUILD_TOKEN | docker login -u "$CI_REGISTRY_USER" --password-stdin $CI_REGISTRY
   script:
+    - "cd $app"
     - docker build --pull -t "$CI_REGISTRY_IMAGE${tag}" .
     - docker push "$CI_REGISTRY_IMAGE${tag}"
         
