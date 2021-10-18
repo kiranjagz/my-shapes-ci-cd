@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Shapes.Api.Models;
 using Shapes.Api.Services;
 using Shapes.Api.Services.Square;
 using System;
@@ -31,6 +32,26 @@ namespace Shapes.Api.Controllers
             double area = _squareShape.CalculateArea();
 
             return Ok(area);
+        }
+
+        // POST: api/<Square>
+        [HttpPost]
+        public IActionResult Post(SquareRequest request)
+        {
+            _squareShape.Height = request.Height;
+            _squareShape.Width = request.Width;
+
+            double area = _squareShape.CalculateArea();
+
+            if (area >= 0)
+            {
+                return Ok(new
+                {
+                    result = area
+                });
+            }
+
+            return BadRequest();
         }
     }
 }
