@@ -7,7 +7,7 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:3.1 AS build
 WORKDIR /src
-COPY ["Shapes.Api/Shapes.Api.csproj", "Shapes.Api/"]
+COPY ["Shapes.Api.csproj", "Shapes.Api/"]
 RUN dotnet restore "Shapes.Api/Shapes.Api.csproj"
 COPY . .
 WORKDIR "/src/Shapes.Api"
