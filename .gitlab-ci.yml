@@ -4,9 +4,11 @@ stages:
   - build
   - test
   - release
+  - build docker image
 
 variables:
     test: "Shapes.Test"
+    app: "Shapes.Api"
 
 before_script:
     - "dotnet restore"
@@ -32,17 +34,29 @@ run unit test app:
     reports:
       junit:
         - ./**/*test-result.xml
-        
-release:
-  stage: release
-  only:
-    - master
+
+docker build image:
+  image: docker:latest
+  stage: build docker image
+  services:
+    - docker:dind
+  before_script:
+    - echo $CI_BUILD_TOKEN | docker login -u "$CI_REGISTRY_USER" --password-stdin $CI_REGISTRY
   script:
-    - dotnet publish "Shapes.Api/Shapes.Api.csproj" -c Release -o ./publish
-    - ls
-  artifacts:
-    paths:
-      - ./publish
+    - "cd $app"
+    - docker build --pull -t "$CI_REGISTRY_IMAGE${tag}" .
+    - docker push "$CI_REGISTRY_IMAGE${tag}"
+        
+# release:
+#   stage: release
+#   only:
+#     - master
+#   script:
+#     - dotnet publish "Shapes.Api/Shapes.Api.csproj" -c Release -o ./publish
+#     - ls
+#   artifacts:
+#     paths:
+#       - ./publish
 
 
 
