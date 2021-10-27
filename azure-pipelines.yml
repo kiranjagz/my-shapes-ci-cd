@@ -9,10 +9,12 @@ variables:
 
 steps:
 - task: DotNetCoreCLI@2
+  displayName: 'restore projects'
   inputs:
     command: 'restore'
 
 - task: DotNetCoreCLI@2
+  displayName: 'run unit tests'
   inputs:
     command: 'test'
 
