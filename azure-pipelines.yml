@@ -40,7 +40,7 @@ stages:
     - job: 'build_docker_image'
       steps:
       - task: Docker@1     
-        displayName: 'Build the Docker image'
+        displayName: 'Build and push Docker image'
         inputs:
           containerregistrytype: 'Container Registry'
           dockerRegistryEndpoint: 'Docker Hub'
@@ -48,5 +48,15 @@ stages:
           dockerFile: 'Dockerfile'
           arguments: '--build-arg BuildId=$(Build.BuildId) --build-arg PAT=$(NugetToken)'
           imageName: 'shapes-api'
-          #useDefaultContext: false
-          #buildContext: 'ShapesApi'
+          includeLatestTag: true
+          useDefaultContext: false
+          buildContext: '.'
+
+      - task: Docker@1
+        displayName: 'Push the Docker image to Dockerhub'
+        inputs:
+          containerregistrytype: 'Container Registry'
+          dockerRegistryEndpoint: 'Docker Hub'
+          command: 'Push an image'
+          imageName: 'shapes-api'
+         #condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'))
