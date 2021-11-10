@@ -6,13 +6,14 @@ pool:
 
 variables:
   buildConfiguration: 'release'
-  ImageName: 'kiranjagz/shapes-api:$(Build.BuildId)'
+  #ImageName: 'kiranjagz/shapes-api:$(Build.BuildId)'
+  ImageName: 'kiranjagz/shapes-api:latest'
 
 stages:
   - stage: 'build'
     displayName: 'build_and_test'
     jobs: 
-    - job: 'build'
+    - job: 'build and test'
       steps:
       - task: DotNetCoreCLI@2
         displayName: 'dotnet restore'
@@ -41,7 +42,7 @@ stages:
     - job: 'build_docker_image'
       steps:
       - task: Docker@1     
-        displayName: 'build docker image'
+        displayName: 'build and push docker image'
         inputs:
           containerregistrytype: 'Container Registry'
           dockerRegistryEndpoint: 'Docker Hub'
