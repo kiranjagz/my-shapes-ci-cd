@@ -14,11 +14,19 @@ stages:
     - job: 'build'
       steps:
       - task: DotNetCoreCLI@2
-        displayName: 'dotnet build'
+        displayName: 'dotnet restore'
         inputs:
-          command: 'build'
-          arguments: '--configuration $(buildConfiguration)'
+          command: 'restore'
+          feedsToUse: 'select'
+          feedRestore: 'bobbi-force/bobbi-force'
           projects: '**/*.csproj'
+          includeNuGetOrg: true   
+      #- task: DotNetCoreCLI@2
+      #  displayName: 'dotnet build'
+      #  inputs:
+      #    command: 'build'
+      #    arguments: '--configuration $(buildConfiguration)'
+      #    projects: '**/*.csproj'
 
     - job: 'test'
       dependsOn: 'build'
