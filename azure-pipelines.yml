@@ -6,6 +6,7 @@ pool:
 
 variables:
   buildConfiguration: 'release'
+  ImageName: 'kiranjagz/shapes-api:$(Build.BuildId)'
 
 stages:
   - stage: 'build'
@@ -40,23 +41,23 @@ stages:
     - job: 'build_docker_image'
       steps:
       - task: Docker@1     
-        displayName: 'Build and push Docker image'
+        displayName: 'build docker image'
         inputs:
           containerregistrytype: 'Container Registry'
           dockerRegistryEndpoint: 'Docker Hub'
           command: 'Build an image'
           dockerFile: 'Dockerfile'
           arguments: '--build-arg BuildId=$(Build.BuildId) --build-arg PAT=$(NugetToken)'
-          imageName: 'shapes-api'
+          imageName: '$(ImageName)'
           includeLatestTag: true
           useDefaultContext: false
           buildContext: '.'
 
       - task: Docker@1
-        displayName: 'Push the Docker image to Dockerhub'
+        displayName: 'push docker image'
         inputs:
           containerregistrytype: 'Container Registry'
           dockerRegistryEndpoint: 'Docker Hub'
           command: 'Push an image'
-          imageName: 'shapes-api'
+          imageName: '$(ImageName)'
          #condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'))
