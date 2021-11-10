@@ -22,10 +22,17 @@ namespace Shapes.Api.Controllers
         public IActionResult Get()
         {
             var message = _pingy.Ping();
+            var subtraction = new Does.Stuff.With.Logic.Services.Subtraction();
+            var result = subtraction.SubtractTwoNumbers(10, 3);
+            var multiple = new Does.Stuff.Multiple.Multiple();
+            var multipleResult = multiple.MultipleTwoNumbers(10, 3);
 
-            _logger.Log(LogLevel.Information, $"Ping controller called with message: {message}");
+            _logger
+                .Log(LogLevel.Information, $"Ping controller called with message: {result} and multiple: {multipleResult}");
+            _logger
+                .Log(LogLevel.Information, "Somehow I managed to get the nuget package building with this project, ha!");
 
-            return Ok(message);
+            return Ok($"{message} :: subraction - {result} and multiple :: - {multipleResult}");
         }
     }
 }
