@@ -34,14 +34,14 @@ stages:
     jobs:
     - job: 'build docker image'
       steps:
-    - task: Docker@1      
-      inputs:
-        containerregistrytype: 'Container Registry'
-        dockerRegistryEndpoint: 'Docker Hub'
-        command: 'Build an image'
-        dockerFile: 'Shapes-api/Dockerfile'
-        arguments: '--build-arg BuildId=$(Build.BuildId) --build-arg PAT=$(NugetToken)'
-        imageName: 'shapes-api'
-        useDefaultContext: false
-        buildContext: 'ShapesApi'
-      displayName: 'Build the Docker image'
+      - task: Docker@1     
+        displayName: 'Build the Docker image'
+        inputs:
+          containerregistrytype: 'Container Registry'
+          dockerRegistryEndpoint: 'Docker Hub'
+          command: 'Build an image'
+          dockerFile: 'Shapes-api/Dockerfile'
+          arguments: '--build-arg BuildId=$(Build.BuildId) --build-arg PAT=$(NugetToken)'
+          imageName: 'shapes-api'
+          useDefaultContext: false
+          buildContext: 'ShapesApi'
