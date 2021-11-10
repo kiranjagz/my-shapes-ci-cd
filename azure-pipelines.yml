@@ -13,7 +13,7 @@ stages:
   - stage: 'build'
     displayName: 'build_and_test'
     jobs: 
-    - job: 'build and test'
+    - job: 'build_and_test'
       steps:
       - task: DotNetCoreCLI@2
         displayName: 'dotnet restore'
@@ -37,7 +37,7 @@ stages:
       #    projects: '**/*.csproj'
 
   - stage: 'docker'
-    displayName: 'docker'
+    displayName: 'build_docker_image'
     jobs:
     - job: 'build_docker_image'
       steps:
