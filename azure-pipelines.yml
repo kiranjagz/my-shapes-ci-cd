@@ -37,12 +37,12 @@ stages:
       #    projects: '**/*.csproj'
 
   - stage: 'docker'
-    displayName: 'build_docker_image'
+    displayName: 'build_and_push_docker_image'
     jobs:
-    - job: 'build_docker_image'
+    - job: 'build_and_push_docker_image'
       steps:
       - task: Docker@1     
-        displayName: 'build and push docker image'
+        displayName: 'build docker image'
         inputs:
           containerregistrytype: 'Container Registry'
           dockerRegistryEndpoint: 'Docker Hub'
