@@ -45,7 +45,7 @@ stages:
           containerregistrytype: 'Container Registry'
           dockerRegistryEndpoint: 'Docker Hub'
           command: 'Build an image'
-          dockerFile: 'Shapes-api/Dockerfile'
+          dockerFile: 'Dockerfile'
           arguments: '--build-arg BuildId=$(Build.BuildId) --build-arg PAT=$(NugetToken)'
           imageName: 'shapes-api'
           useDefaultContext: false
