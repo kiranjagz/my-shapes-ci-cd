@@ -1,17 +1,17 @@
 trigger:
- - main
+  - main
+
+pool:
+  vmImage: 'ubuntu-latest'
 
 variables:
-  buildConfiguration: 'Release'
-  imageName: 'shapes-api'
+  buildConfiguration: 'release'
 
 stages:
-  - stage: 'Build'
-    displayName: 'build and test'
+  - stage: 'build'
+    displayName: 'build_and_test'
     jobs: 
-    - job: 'Build and Test'
-      pool:
-        vmImage: 'ubuntu-latest'
+    - job: 'build'
       steps:
       - task: DotNetCoreCLI@2
         displayName: 'dotnet build'
@@ -20,27 +20,28 @@ stages:
           arguments: '--configuration $(buildConfiguration)'
           projects: '**/*.csproj'
 
+    - job: 'test'
+      dependsOn: 'build'
+      steps:
       - task: DotNetCoreCLI@2
         displayName: 'dotnet test'
         inputs:
-        command: 'test'
-        projects: 'Shapes.Api/Shapes.Test.csproj'
+          command: 'test'
+          projects: 'Shapes.Test/Shapes.Test.csproj'
 
-  - stage: 'Docker'
-    displayName: 'docker build'
+  - stage: 'docker'
+    displayName: 'docker'
     jobs:
-    - job: 'Pack and Push'
-        pool:
-          vmImage: 'ubuntu-latest'
+    - job: 'build docker image'
       steps:
-    - task: Docker@1
-      displayName: 'build the docker image'
+    - task: Docker@1      
       inputs:
         containerregistrytype: 'Container Registry'
         dockerRegistryEndpoint: 'Docker Hub'
         command: 'Build an image'
-        dockerFile: 'ShapesApi/Dockerfile'
-        arguments: '--build-arg PAT=$(NugetToken)'
-        imageName: '$(imageName)'
+        dockerFile: 'Shapes-api/Dockerfile'
+        arguments: '--build-arg BuildId=$(Build.BuildId) --build-arg PAT=$(NugetToken)'
+        imageName: 'shapes-api'
         useDefaultContext: false
         buildContext: 'ShapesApi'
+      displayName: 'Build the Docker image'
