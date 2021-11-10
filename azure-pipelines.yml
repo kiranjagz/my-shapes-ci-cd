@@ -32,7 +32,7 @@ stages:
   - stage: 'docker'
     displayName: 'docker'
     jobs:
-    - job: 'build docker image'
+    - job: 'build_docker_image'
       steps:
       - task: Docker@1     
         displayName: 'Build the Docker image'
