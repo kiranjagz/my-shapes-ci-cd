@@ -24,7 +24,7 @@ stages:
         displayName: 'dotnet test'
         inputs:
         command: 'test'
-        projects: 'Does.Stuff.Test/Does.Stuff.Test.csproj'
+        projects: 'Shapes.Api/Shapes.Test.csproj'
 
   - stage: 'Docker'
     displayName: 'docker build'
