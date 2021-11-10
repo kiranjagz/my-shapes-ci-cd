@@ -23,18 +23,20 @@ stages:
           feedRestore: 'bobbi-force/bobbi-force'
           projects: '**/*.csproj'
           includeNuGetOrg: true
+
+      - task: DotNetCoreCLI@2
+        displayName: 'dotnet build'
+        inputs:
+          command: 'build'
+          arguments: '--configuration $(buildConfiguration)'
+          projects: '**/*.csproj'
           
       - task: DotNetCoreCLI@2
         displayName: 'dotnet test'
         inputs:
           command: 'test'
           projects: 'Shapes.Test/Shapes.Test.csproj'
-      #- task: DotNetCoreCLI@2
-      #  displayName: 'dotnet build'
-      #  inputs:
-      #    command: 'build'
-      #    arguments: '--configuration $(buildConfiguration)'
-      #    projects: '**/*.csproj'
+
 
   - stage: 'docker'
     displayName: 'build_and_push_docker_image'
@@ -61,4 +63,4 @@ stages:
           dockerRegistryEndpoint: 'Docker Hub'
           command: 'Push an image'
           imageName: '$(ImageName)'
-         #condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'))
+         condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'))
