@@ -48,5 +48,5 @@ stages:
           dockerFile: 'Dockerfile'
           arguments: '--build-arg BuildId=$(Build.BuildId) --build-arg PAT=$(NugetToken)'
           imageName: 'shapes-api'
-          useDefaultContext: false
-          buildContext: 'ShapesApi'
+          #useDefaultContext: false
+          #buildContext: 'ShapesApi'
