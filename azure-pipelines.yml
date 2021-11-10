@@ -20,22 +20,19 @@ stages:
           feedsToUse: 'select'
           feedRestore: 'bobbi-force/bobbi-force'
           projects: '**/*.csproj'
-          includeNuGetOrg: true   
+          includeNuGetOrg: true
+          
+      - task: DotNetCoreCLI@2
+        displayName: 'dotnet test'
+        inputs:
+          command: 'test'
+          projects: 'Shapes.Test/Shapes.Test.csproj'
       #- task: DotNetCoreCLI@2
       #  displayName: 'dotnet build'
       #  inputs:
       #    command: 'build'
       #    arguments: '--configuration $(buildConfiguration)'
       #    projects: '**/*.csproj'
-
-    - job: 'test'
-      dependsOn: 'build'
-      steps:
-      - task: DotNetCoreCLI@2
-        displayName: 'dotnet test'
-        inputs:
-          command: 'test'
-          projects: 'Shapes.Test/Shapes.Test.csproj'
 
   - stage: 'docker'
     displayName: 'docker'
