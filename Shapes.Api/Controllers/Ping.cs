@@ -32,7 +32,7 @@ namespace Shapes.Api.Controllers
             _logger
                 .Log(LogLevel.Information, "Somehow I managed to get the nuget package building with this project, ha!");
 
-            return Ok($"{message} :: subraction - {result} and multiple :: - {multipleResult}");
+            return Ok($"{message} :: subraction {result} and multiple :: {multipleResult}");
         }
     }
 }
