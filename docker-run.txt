@@ -1,0 +1,4 @@
+#build
+docker build -t shapes-api:latest --build-arg PAT={token} .
+#run
+docker run run -d -p 8089:80 shapes-api:latest

@@ -8,12 +8,18 @@ EXPOSE 443
 FROM mcr.microsoft.com/dotnet/sdk:3.1 AS build
 WORKDIR /src
 COPY ["Shapes.Api/Shapes.Api.csproj", "Shapes.Api/"]
-COPY ["nuget.config", ""]
+#COPY ["nuget.config", ""]
 
-ARG PAT=cmr7feouoibvv6gvbecz2udmibaovqe7j7hdlchr7unf54fxufqq
-RUN sed -i "s|</configuration>|<packageSourceCredentials><bobbi-force><add key=\"Username\" value=\"PAT\" /><add key=\"ClearTextPassword\" value=\"${PAT}\" /></bobbi-force></packageSourceCredentials></configuration>|" nuget.config
+ARG PAT
+ENV PAT ${PAT}
 
-RUN dotnet restore "Shapes.Api/Shapes.Api.csproj" --configfile "./nuget.config"
+RUN wget -qO- https://raw.githubusercontent.com/Microsoft/artifacts-credprovider/master/helpers/installcredprovider.sh | bash
+ENV NUGET_CREDENTIALPROVIDER_SESSIONTOKENCACHE_ENABLED true
+ENV VSS_NUGET_EXTERNAL_FEED_ENDPOINTS "{\"endpointCredentials\": [{\"endpoint\":\"https://pkgs.dev.azure.com/kiranjagz/Bobbi-Force/_packaging/bobbi-force/nuget/v3/index.json\", \"password\":\"${PAT}\"}]}"
+#RUN sed -i "s|</configuration>|<packageSourceCredentials><bobbi-force><add key=\"Username\" value=\"PAT\" /><add key=\"ClearTextPassword\" value=\"${PAT}\" /></bobbi-force></packageSourceCredentials></configuration>|" nuget.config
+
+#RUN dotnet restore "Shapes.Api/Shapes.Api.csproj" --configfile "./nuget.config"
+RUN dotnet restore -s "https://pkgs.dev.azure.com/kiranjagz/Bobbi-Force/_packaging/bobbi-force/nuget/v3/index.json" -s "https://api.nuget.org/v3/index.json" "Shapes.Api/Shapes.Api.csproj"
 COPY . .
 WORKDIR "/src/Shapes.Api"
 RUN dotnet build "Shapes.Api.csproj" -c Release -o /app/build
