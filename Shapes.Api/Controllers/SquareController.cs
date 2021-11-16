@@ -13,11 +13,11 @@ namespace Shapes.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class Square : ControllerBase
+    public class SquareController : ControllerBase
     {
         private readonly SquareModule _squareShape;
 
-        public Square()
+        public SquareController()
         {
             _squareShape = new SquareModule();
         }

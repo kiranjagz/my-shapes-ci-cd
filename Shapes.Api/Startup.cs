@@ -6,6 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Shapes.Api.Models;
 using Shapes.Api.Services;
 using Shapes.Api.Services.Pingy;
 using System;
@@ -30,6 +31,8 @@ namespace Shapes.Api
             services.AddScoped<IPingy, PingyModule>();
 
             services.AddControllers();
+
+            services.Configure<AppSettings>(options => Configuration.GetSection("AppSettings").Bind(options));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

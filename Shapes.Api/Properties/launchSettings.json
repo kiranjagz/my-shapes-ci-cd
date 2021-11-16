@@ -20,7 +20,7 @@
     "Shapes.Api": {
       "commandName": "Project",
       "launchBrowser": true,
-      "launchUrl": "api/ping",
+      "launchUrl": "api/settings",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },

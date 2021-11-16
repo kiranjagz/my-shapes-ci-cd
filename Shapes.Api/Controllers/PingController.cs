@@ -11,11 +11,11 @@ namespace Shapes.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class Ping : ControllerBase
+    public class PingController : ControllerBase
     {
         private readonly IPingy _pingy;
         private readonly ILogger _logger;
-        public Ping(IPingy pingy, ILogger<Ping> logger)
+        public PingController(IPingy pingy, ILogger<PingController> logger)
         {
             _pingy = pingy;
             _logger = logger;
