@@ -1,0 +1,16 @@
+version: "3.8"
+
+services:      
+  using-env-variables:
+    image: shapes-env:1.0
+    build:
+      context: .
+      args:
+        - PAT=6s5m46dwxfrhxp7s6qm6vnuk2dvoxmj6dpam6prvuttgoh4g5zaa
+      dockerfile: ./Dockerfile
+    ports:
+      - 8089:80
+    environment: 
+      - AppSettings__Name=Thanos
+      - AppSettings__Value1=United are a joke
+      - AppSettings__Secert=olesatthewheel!@#$12345
