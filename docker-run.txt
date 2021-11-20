@@ -1,6 +1,6 @@
 #build
 docker build -t shapes-api:latest --build-arg PAT={token} .
 #run
-docker run run -d -p 8088:80 shapes-api:latest
+docker run -d -p 8088:80 shapes-api:latest
 #run with env overrides
-docker run run -d -e Appsettings__Name="Thanos" -p 8088:80 shapes-api:latest
+docker run -d -e Appsettings__Name="Thanos" -p 8088:80 shapes-api:latest
