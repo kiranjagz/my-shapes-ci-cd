@@ -30,7 +30,10 @@ namespace Shapes.Api
         {
             services.AddScoped<IPingy, PingyModule>();
 
-            services.AddControllers();
+            services.AddControllers().AddJsonOptions(options =>
+            {
+                options.JsonSerializerOptions.WriteIndented = true;
+            });
 
             services.Configure<AppSettings>(options => Configuration.GetSection("AppSettings").Bind(options));
         }
