@@ -28,7 +28,7 @@ stages:
         inputs:
           command: 'build'
           arguments: '-o --configuration $(buildConfiguration)'
-          projects: 'src/shapes.api/shapes.api.csproj'
+          projects: 'src/Shapes.Api/Shapes.Api.csproj'
           
       - task: DotNetCoreCLI@2
         displayName: 'dotnet test'
