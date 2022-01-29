@@ -39,8 +39,12 @@ stages:
       - task: PublishBuildArtifacts@1
         displayName: 'dotnet publish'
         inputs:
-         pathToPublish: '$(Build.ArtifactStagingDirectory)'
-         artifactName: drop
+          command: 'publish'
+          publishWebProjects: false
+          projects: 'src/Shapes.Api/Shapes.Api.csproj'
+          arguments: '-o $(Build.ArtifactStagingDirectory)/Output'
+          zipAfterPublish: true
+          modifyOutputPath: true
 
   - stage: 'docker'
     displayName: 'build_and_push_docker_image'
