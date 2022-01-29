@@ -7,6 +7,7 @@ namespace Shapes.Api.Services
 {
     public interface IShape
     {
+        double Width { get; set; }
         double CalculateArea();
     }
 }

@@ -1,5 +1,5 @@
 using NUnit.Framework;
-using Shapes.Api.Services.Square;
+using Shapes.Api.Services.Shapes;
 
 namespace Shapes.Test
 {

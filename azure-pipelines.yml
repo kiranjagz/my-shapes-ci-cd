@@ -36,6 +36,11 @@ stages:
           command: 'test'
           projects: 'src/Shapes.Test/Shapes.Test.csproj'
 
+      - task: PublishBuildArtifacts@1
+        displayName: 'dotnet publish'
+        inputs:
+         pathToPublish: '$(Build.ArtifactStagingDirectory)'
+         artifactName: drop
 
   - stage: 'docker'
     displayName: 'build_and_push_docker_image'
