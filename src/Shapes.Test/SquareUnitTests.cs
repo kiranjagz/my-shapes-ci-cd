@@ -13,13 +13,11 @@ namespace Shapes.Test
             _squareShape = new SquareModule();
         }
 
-        [TestCase(2, 2, 4)]
-        [TestCase(2, 3, 6)]
-        [TestCase(10, 4, 40)]
-        [TestCase(4, 4, 16)]
-        public void Calculate_Area_Of_Square(double height, double width, double result)
+        [TestCase(2, 4)]
+        [TestCase(3, 9)]
+        [TestCase(4, 16)]
+        public void Calculate_Area_Of_Square(double width, double result)
         {
-            _squareShape.Height = height;
             _squareShape.Width = width;
 
             double area = _squareShape.CalculateArea();
@@ -27,10 +25,9 @@ namespace Shapes.Test
             Assert.That(area, Is.EqualTo(result));
         }
 
-        [TestCase(-2, 2, -4)]
-        public void Calculate_Area_Of_Square_Negative_Number(double height, double width, double result)
+        [TestCase(-2, 4)]
+        public void Calculate_Area_Of_Square_Negative_Number(double width, double result)
         {
-            _squareShape.Height = height;
             _squareShape.Width = width;
 
             double area = _squareShape.CalculateArea();
