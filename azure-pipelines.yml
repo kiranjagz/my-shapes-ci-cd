@@ -27,7 +27,7 @@ stages:
         displayName: 'dotnet build'
         inputs:
           command: 'build'
-          arguments: '--configuration $(buildConfiguration)'
+          arguments: '-o --configuration $(buildConfiguration)'
           projects: '**/*.csproj'
           
       - task: DotNetCoreCLI@2

@@ -16,12 +16,9 @@ namespace Shapes.Api.Controllers
     [ApiController]
     public class ShapesController : ControllerBase
     {
-        private readonly SquareModule _squareShape;
-        private readonly CircleModule _circleShape;
-
         public ShapesController()
         {
-            _squareShape = new SquareModule();
+
         }
 
         // GET: api/<Square>/1
