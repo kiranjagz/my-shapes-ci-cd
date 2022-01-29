@@ -36,15 +36,17 @@ stages:
           command: 'test'
           projects: 'src/Shapes.Test/Shapes.Test.csproj'
 
-      - task: PublishBuildArtifacts@1
-        displayName: 'dotnet publish'
+      - task: DotNetCoreCLI@2
         inputs:
-          command: 'publish'
-          publishWebProjects: false
-          projects: 'src/Shapes.Api/Shapes.Api.csproj'
-          arguments: '-o $(Build.ArtifactStagingDirectory)/Output'
-          zipAfterPublish: true
-          modifyOutputPath: true
+         command: publish
+         publishWebProjects: True
+         arguments: '--configuration $(BuildConfiguration) --output $(Build.ArtifactStagingDirectory)'
+         zipAfterPublish: True
+
+      - task: PublishPipelineArtifact@1
+        inputs:
+         targetPath: '$(Build.ArtifactStagingDirectory)' 
+         artifactName: 'myWebsiteName'
 
   #- stage: 'docker'
   #  displayName: 'build_and_push_docker_image'
