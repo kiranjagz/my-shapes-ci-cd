@@ -36,11 +36,6 @@ stages:
           command: 'test'
           projects: 'src/Shapes.Test/Shapes.Test.csproj'
 
-  - stage: 'publish'
-    displayName: 'publish_and_upload_artifact'
-    jobs: 
-    - job: 'publish_artifacts'
-      steps:
       - task: DotNetCoreCLI@2
         displayName: 'dotnet publish'
         inputs:
