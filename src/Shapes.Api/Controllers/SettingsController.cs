@@ -22,8 +22,6 @@ namespace Shapes.Api.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            //_configuration.GetSection("AppSettings").Bind(_appSettings);
-
             return Ok(_appSettings);
         }
     }

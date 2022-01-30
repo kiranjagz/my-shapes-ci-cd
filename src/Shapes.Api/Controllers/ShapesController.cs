@@ -1,10 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using Shapes.Api.Factory;
 using Shapes.Api.Models;
 using Shapes.Api.Services;
 using Shapes.Api.Services.Shapes;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -16,9 +18,10 @@ namespace Shapes.Api.Controllers
     [ApiController]
     public class ShapesController : ControllerBase
     {
-        public ShapesController()
+        private readonly ILogger _logger;
+        public ShapesController(ILogger<ShapesController> logger)
         {
-
+            _logger = logger;
         }
 
         // GET: api/<Square>/1
@@ -37,10 +40,16 @@ namespace Shapes.Api.Controllers
 
             shapes.ForEach(shape =>
             {
+                _logger.LogInformation($"Trying to calculate area for shape: {shape.GetType().Name} with width: {shape.Width}");
+
+                var area = shape.CalculateArea();
+
+                _logger.Log(LogLevel.Information, $"Area is equal to: {area.ToString(new CultureInfo("en-US"))} for shape: {shape.GetType().Name}");
+
                 response.Add(new ShapeResponse
                 {
                     Shape = shape.GetType().Name,
-                    Area = shape.CalculateArea()
+                    Area = area
                 });
             });
 
