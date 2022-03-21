@@ -4,11 +4,10 @@ namespace Shapes.Api.Services.Shapes
 {
     public class CircleModule : IShape
     {
-        public double Width { get; set; }
 
-        public double CalculateArea()
+        public double CalculateArea(double width)
         {
-            return Math.PI * (Width / 2) * (Width / 2);
+            return Math.PI * (width / 2) * (width / 2);
         }
     }
 }

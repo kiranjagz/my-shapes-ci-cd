@@ -7,11 +7,10 @@ namespace Shapes.Api.Services.Shapes
 {
     public class SquareModule : IShape
     {
-        public double Width { get; set; }
 
-        public double CalculateArea()
+        public double CalculateArea(double width)
         {
-            return Width * Width;
+            return width * width;
         }
     }
 }

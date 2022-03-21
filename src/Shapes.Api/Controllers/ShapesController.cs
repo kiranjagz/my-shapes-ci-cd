@@ -24,25 +24,24 @@ namespace Shapes.Api.Controllers
             _logger = logger;
         }
 
-        // GET: api/<Square>/1
+        // GET: api/<Shapes>/1
         [Route("{width}")]
         [HttpGet]
         public IActionResult Get(int width)
         {
-            var shapes = new List<IShape>();
+            var shapes = new List<IShape>()
+            {
+              new SquareModule(),
+              new CircleModule()
+            };
+
             var response = new List<ShapeResponse>();
-
-            var square = new SquareModule { Width = width };
-            var circle = new CircleModule { Width = width };
-
-            shapes.Add(square);
-            shapes.Add(circle);
 
             shapes.ForEach(shape =>
             {
-                _logger.LogInformation($"Trying to calculate area for shape: {shape.GetType().Name} with width: {shape.Width}");
+                _logger.LogInformation($"Trying to calculate area for shape: {shape.GetType().Name} with width: {width}");
 
-                var area = shape.CalculateArea();
+                var area = shape.CalculateArea(width);
 
                 _logger.Log(LogLevel.Information, $"Area is equal to: {area.ToString(new CultureInfo("en-US"))} for shape: {shape.GetType().Name}");
 
@@ -56,17 +55,16 @@ namespace Shapes.Api.Controllers
             return Ok(response);
         }
 
-        // POST: api/<Square>
+        // POST: api/<Shapes>
         [HttpPost]
         public IActionResult Post(ShapeRequest shapeRequest)
         {
             var shape = OperatorFactory.ReturnShape(shapeRequest);
-            shape.Width = shapeRequest.Width;
 
             return Ok(new
             {
                 shape = shape.GetType().Name,
-                area = shape.CalculateArea(),
+                area = shape.CalculateArea(shapeRequest.Width),
             });
         }
     }

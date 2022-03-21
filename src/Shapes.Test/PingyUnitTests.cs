@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Text;
 using NUnit.Framework;
-using Shapes.Api.Services;
 using Shapes.Api.Services.Pingy;
 
 namespace Shapes.Test

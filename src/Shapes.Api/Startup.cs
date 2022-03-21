@@ -7,7 +7,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Shapes.Api.Models;
-using Shapes.Api.Services;
 using Shapes.Api.Services.Pingy;
 using System;
 using System.Collections.Generic;
