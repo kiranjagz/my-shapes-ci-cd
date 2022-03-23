@@ -24,7 +24,7 @@ stages:
           includeNuGetOrg: true
 
       - task: DotNetCoreCLI@2
-        displayName: 'dotnet build'
+        displayName: 'dotnet build $(buildConfiguration)'
         inputs:
           command: 'build'
           arguments: '--configuration $(buildConfiguration)'
@@ -44,35 +44,47 @@ stages:
          arguments: '--configuration $(BuildConfiguration) --output $(Build.ArtifactStagingDirectory)'
          zipAfterPublish: True
 
-      - task: PublishPipelineArtifact@1
-        displayName: 'publish artificat'
-        inputs:
-         targetPath: '$(Build.ArtifactStagingDirectory)' 
-         artifactName: 'ReleaseOutput'
+      # - task: PublishPipelineArtifact@1
+      #   displayName: 'publish artificat'
+      #   inputs:
+      #    targetPath: '$(Build.ArtifactStagingDirectory)' 
+      #    artifactName: 'ReleaseOutput'
 
-  - stage: 'docker'
-    displayName: 'build_and_push_docker_image'
+  - stage: 'deploy_to_azure'
+    displayName: 'deploy_to_azure'
     jobs:
-    - job: 'build_and_push_docker_image'
+    - job: 'deploy_to_azure'
       steps:
-      - task: Docker@1     
-        displayName: 'build docker image'
+      - task: AzureWebApp@1
         inputs:
-          containerregistrytype: 'Container Registry'
-          dockerRegistryEndpoint: 'Docker Hub'
-          command: 'Build an image'
-          dockerFile: 'Dockerfile'
-          arguments: '--build-arg PAT=$(System.AccessToken)'
-          imageName: '$(ImageName)'
-          includeLatestTag: true
-          useDefaultContext: false
-          buildContext: '.'
+          azureSubscription: 'sub-zero'
+          appType: 'webAppLinux'
+          appName: 'MyShapesApi'
+          package: '$(System.DefaultWorkingDirectory)/**/*.zip'
 
-      - task: Docker@1
-        displayName: 'push docker image'
-        inputs:
-          containerregistrytype: 'Container Registry'
-          dockerRegistryEndpoint: 'Docker Hub'
-          command: 'Push an image'
-          imageName: '$(ImageName)'
-          condition: and(succeeded())
+  # - stage: 'docker'
+  #   displayName: 'build_and_push_docker_image'
+  #   jobs:
+  #   - job: 'build_and_push_docker_image'
+  #     steps:
+  #     - task: Docker@1     
+  #       displayName: 'build docker image'
+  #       inputs:
+  #         containerregistrytype: 'Container Registry'
+  #         dockerRegistryEndpoint: 'Docker Hub'
+  #         command: 'Build an image'
+  #         dockerFile: 'Dockerfile'
+  #         arguments: '--build-arg PAT=$(System.AccessToken)'
+  #         imageName: '$(ImageName)'
+  #         includeLatestTag: true
+  #         useDefaultContext: false
+  #         buildContext: '.'
+
+  #     - task: Docker@1
+  #       displayName: 'push docker image'
+  #       inputs:
+  #         containerregistrytype: 'Container Registry'
+  #         dockerRegistryEndpoint: 'Docker Hub'
+  #         command: 'Push an image'
+  #         imageName: '$(ImageName)'
+  #         condition: and(succeeded())
