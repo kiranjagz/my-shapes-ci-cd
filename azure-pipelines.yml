@@ -57,7 +57,7 @@ stages:
       steps:
       - task: AzureWebApp@1
         inputs:
-          azureSubscription: 'sub-zero'
+          azureSubscription: '77de49d2-0037-494f-8963-f6cfb8b21173'
           appType: 'webAppLinux'
           appName: 'MyShapesApi'
           package: '$(System.DefaultWorkingDirectory)/**/*.zip'
