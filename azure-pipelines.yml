@@ -22,7 +22,7 @@ stages:
           feedRestore: 'bobbi-force/bobbi-force'
           projects: '**/*.csproj'
           includeNuGetOrg: true
-      :          
+      
       - task: DotNetCoreCLI@2
         displayName: 'dotnet test'
         inputs:
