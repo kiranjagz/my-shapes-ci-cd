@@ -9,11 +9,20 @@ variables:
   ImageName: 'kiranjagz/shapes-api:latest'
 
 stages:
-  - stage: 'build'
-    displayName: 'build_and_test'
+  - stage: 'test'
+    displayName: 'test'
     jobs: 
-    - job: 'build_and_test'
-      steps:          
+    - job: 'test'
+      steps:
+      - task: DotNetCoreCLI@2
+        displayName: 'dotnet restore $(buildConfiguration)'
+        inputs:
+          command: 'restore'
+          feedsToUse: 'select'
+          feedRestore: 'bobbi-force/bobbi-force'
+          projects: '**/*.csproj'
+          includeNuGetOrg: true
+      :          
       - task: DotNetCoreCLI@2
         displayName: 'dotnet test'
         inputs:
