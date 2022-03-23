@@ -13,36 +13,20 @@ stages:
     displayName: 'build_and_test'
     jobs: 
     - job: 'build_and_test'
-      steps:
-      - task: DotNetCoreCLI@2
-        displayName: 'dotnet restore'
-        inputs:
-          command: 'restore'
-          feedsToUse: 'select'
-          feedRestore: 'bobbi-force/bobbi-force'
-          projects: '**/*.csproj'
-          includeNuGetOrg: true
-
-      - task: DotNetCoreCLI@2
-        displayName: 'dotnet build $(buildConfiguration)'
-        inputs:
-          command: 'build'
-          arguments: '--configuration $(buildConfiguration)'
-          projects: 'src/Shapes.Api/Shapes.Api.csproj'
-          
+      steps:          
       - task: DotNetCoreCLI@2
         displayName: 'dotnet test'
         inputs:
           command: 'test'
           projects: 'src/Shapes.Test/Shapes.Test.csproj'
 
-      - task: DotNetCoreCLI@2
-        displayName: 'dotnet publish'
-        inputs:
-         command: publish
-         publishWebProjects: True
-         arguments: '--configuration $(BuildConfiguration) --output $(Build.ArtifactStagingDirectory)'
-         zipAfterPublish: True
+      #- task: DotNetCoreCLI@2
+      #  displayName: 'dotnet publish'
+      #  inputs:
+      #   command: publish
+      #   publishWebProjects: True
+      #   arguments: '--configuration $(BuildConfiguration) --output $(Build.ArtifactStagingDirectory)'
+      #   zipAfterPublish: True
 
       # - task: PublishPipelineArtifact@1
       #   displayName: 'publish artificat'
@@ -55,6 +39,23 @@ stages:
     jobs:
     - job: 'deploy_to_azure'
       steps:
+      - task: DotNetCoreCLI@2
+        displayName: 'dotnet restore $(buildConfiguration)'
+        inputs:
+          command: 'restore'
+          feedsToUse: 'select'
+          feedRestore: 'bobbi-force/bobbi-force'
+          projects: '**/*.csproj'
+          includeNuGetOrg: true
+
+      - task: DotNetCoreCLI@2
+        displayName: 'dotnet build $(buildConfiguration)'
+        inputs:
+          command: 'publish'
+          arguments: '--configuration $(buildConfiguration)'
+          projects: 'src/Shapes.Api/Shapes.Api.csproj'
+          publishWebProjects: true
+
       - task: AzureWebApp@1
         inputs:
           azureSubscription: 'MyARMSubscription'
