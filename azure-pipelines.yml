@@ -72,29 +72,29 @@ stages:
           appName: 'MyShapesApi'
           package: '$(System.DefaultWorkingDirectory)/**/*.zip'
 
-  # - stage: 'docker'
-  #   displayName: 'build_and_push_docker_image'
-  #   jobs:
-  #   - job: 'build_and_push_docker_image'
-  #     steps:
-  #     - task: Docker@1     
-  #       displayName: 'build docker image'
-  #       inputs:
-  #         containerregistrytype: 'Container Registry'
-  #         dockerRegistryEndpoint: 'Docker Hub'
-  #         command: 'Build an image'
-  #         dockerFile: 'Dockerfile'
-  #         arguments: '--build-arg PAT=$(System.AccessToken)'
-  #         imageName: '$(ImageName)'
-  #         includeLatestTag: true
-  #         useDefaultContext: false
-  #         buildContext: '.'
+   - stage: 'docker'
+     displayName: 'build_and_push_docker_image'
+     jobs:
+     - job: 'build_and_push_docker_image'
+       steps:
+       - task: Docker@1     
+         displayName: 'build docker image'
+         inputs:
+           containerregistrytype: 'Container Registry'
+           dockerRegistryEndpoint: 'Docker Hub'
+           command: 'Build an image'
+           dockerFile: 'Dockerfile'
+           arguments: '--build-arg PAT=$(System.AccessToken)'
+           imageName: '$(ImageName)'
+           includeLatestTag: true
+           useDefaultContext: false
+           buildContext: '.'
 
-  #     - task: Docker@1
-  #       displayName: 'push docker image'
-  #       inputs:
-  #         containerregistrytype: 'Container Registry'
-  #         dockerRegistryEndpoint: 'Docker Hub'
-  #         command: 'Push an image'
-  #         imageName: '$(ImageName)'
-  #         condition: and(succeeded())
+       - task: Docker@1
+         displayName: 'push docker image'
+         inputs:
+           containerregistrytype: 'Container Registry'
+           dockerRegistryEndpoint: 'Docker Hub'
+           command: 'Push an image'
+           imageName: '$(ImageName)'
+           condition: and(succeeded())

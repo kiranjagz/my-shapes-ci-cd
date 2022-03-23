@@ -20,8 +20,10 @@ namespace Shapes.Api.Controllers
             _pingy = pingy;
             _logger = logger;
         }
+
         // GET: api/<Ping>
         [HttpGet]
+        [Route("Ping")]
         public IActionResult Get()
         {
             var numberOne = 30; var numberTwo = 3;
@@ -46,6 +48,14 @@ namespace Shapes.Api.Controllers
                 multipleResult = multipleResult,
                 dateTime = DateTime.Now.ToString()
             });
+        }
+
+        // GET: api/<Pong>
+        [HttpGet]
+        [Route("Pong")]
+        public IActionResult Pong()
+        {
+            return Ok("Pong!");
         }
     }
 }
