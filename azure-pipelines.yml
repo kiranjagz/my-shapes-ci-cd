@@ -76,7 +76,7 @@ stages:
   - stage: 'docker'
     displayName: 'build_and_push_docker_image'
     jobs:
-    - job: 'build_image'
+    - job: 'build_and_push_docker_image'
       steps:
       - task: Docker@1     
         displayName: 'build docker image'
@@ -91,10 +91,6 @@ stages:
           useDefaultContext: false
           buildContext: '.'
 
-    - job: 'push_image'
-      dependsOn: build_image
-      condition: succeeded('build_image')
-      steps: 
       - task: Docker@1
         displayName: 'push docker image'
         inputs:
