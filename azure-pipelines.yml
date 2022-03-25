@@ -37,11 +37,11 @@ stages:
          arguments: '--configuration $(BuildConfiguration) --output $(Build.ArtifactStagingDirectory)'
          zipAfterPublish: True
 
-       - task: PublishPipelineArtifact@1
-         displayName: 'publish artificat'
-         inputs:
-          targetPath: '$(Build.ArtifactStagingDirectory)' 
-          artifactName: 'ReleaseOutput'
+      - task: PublishPipelineArtifact@1
+        displayName: 'publish artificat'
+        inputs:
+         targetPath: '$(Build.ArtifactStagingDirectory)' 
+         artifactName: 'ReleaseOutput'
 
   - stage: 'deploy_to_azure'
     displayName: 'deploy_to_azure'
@@ -76,7 +76,7 @@ stages:
   - stage: 'docker'
     displayName: 'build_and_push_docker_image'
     jobs:
-    - job: 'build_and_push_docker_image'
+    - job: 'build_image'
       steps:
       - task: Docker@1     
         displayName: 'build docker image'
@@ -91,6 +91,10 @@ stages:
           useDefaultContext: false
           buildContext: '.'
 
+    - job: 'push_image'
+      dependsOn: build_image
+      condition: and(succeeded('build_image')
+      steps: 
       - task: Docker@1
         displayName: 'push docker image'
         inputs:
