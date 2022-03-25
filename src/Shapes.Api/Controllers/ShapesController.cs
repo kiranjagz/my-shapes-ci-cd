@@ -2,7 +2,6 @@
 using Microsoft.Extensions.Logging;
 using Shapes.Api.Factory;
 using Shapes.Api.Models;
-using Shapes.Api.Services;
 using Shapes.Api.Services.Shapes;
 using System;
 using System.Collections.Generic;

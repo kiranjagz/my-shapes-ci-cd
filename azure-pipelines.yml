@@ -29,13 +29,13 @@ stages:
           command: 'test'
           projects: 'src/Shapes.Test/Shapes.Test.csproj'
 
-      #- task: DotNetCoreCLI@2
-      #  displayName: 'dotnet publish'
-      #  inputs:
-      #   command: publish
-      #   publishWebProjects: True
-      #   arguments: '--configuration $(BuildConfiguration) --output $(Build.ArtifactStagingDirectory)'
-      #   zipAfterPublish: True
+      - task: DotNetCoreCLI@2
+        displayName: 'dotnet publish'
+        inputs:
+         command: publish
+         publishWebProjects: True
+         arguments: '--configuration $(BuildConfiguration) --output $(Build.ArtifactStagingDirectory)'
+         zipAfterPublish: True
 
       # - task: PublishPipelineArtifact@1
       #   displayName: 'publish artificat'
