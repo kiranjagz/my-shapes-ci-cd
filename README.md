@@ -6,4 +6,4 @@
 4. Uses azure devops pipeline for ci tasks.
 5. Deploys to azure app services.
 
-# The project main purpose is to unpack azure pipeline understanding, and deploy to a container registry and azure app services.
+The project's main purpose is to unpack azure pipeline understanding, and deploy to a container registry and azure app services.
